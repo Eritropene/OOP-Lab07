@@ -8,7 +8,7 @@ package it.unibo.oop.lab.socialnetwork;
  * Represents a the contract for a generic application {@link UserImpl}.
  * 
  */
-public interface User {
+public interface User{
 
     /**
      * Return the age of this user.
