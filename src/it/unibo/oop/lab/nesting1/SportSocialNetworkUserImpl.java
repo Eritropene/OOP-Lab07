@@ -27,39 +27,28 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
     /**
      * Static {@link Sport} constant.
      */
-    public static final Sport SOCCER;
+    public static final Sport SOCCER = new Sport("Soccer");
     /**
      * Static {@link Sport} constant.
      */
-    public static final Sport F1;
+    public static final Sport F1 = new Sport("F1");
     /**
      * Static {@link Sport} constant.
      */
-    public static final Sport MOTOGP;
+    public static final Sport MOTOGP = new Sport("MotoGP");
     /**
      * Static {@link Sport} constant.
      */
-    public static final Sport VOLLEY;
+    public static final Sport VOLLEY = new Sport("Volley");
     /**
      * Static {@link Sport} constant.
      */
-    public static final Sport BASKET;
+    public static final Sport BASKET = new Sport("Basket");
     /**
      * Static {@link Sport} constant.
      */
-    public static final Sport BIKE;
+    public static final Sport BIKE = new Sport("Bike");
 
-    /*
-     * TODO: initialize properly these sports
-     */
-    static {
-        SOCCER = null;
-        F1 = null;
-        MOTOGP = null;
-        VOLLEY = null;
-        BASKET = null;
-        BIKE = null;
-    }
 
     /**
      * Field meant to keep track of the set of sports followed/done by a user.
@@ -112,9 +101,13 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      * @param sport
      *            a sport followed/done by the user
      */
-    // TODO
     public void addSport(final Sport sport) {
-
+    		for (Sport sp : sports) {
+    			if (sp.equals(sport)) {
+    				return;
+    			}
+    		}
+    		sports.add(sport);
     }
 
     /**
@@ -124,8 +117,12 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      *            sport to use as an input
      * @return true if a user likes sport s
      */
-    // TODO
     public boolean hasSport(final Sport s) {
+    	for (Sport sp : sports) {
+			if (sp.equals(s)) {
+				return true;
+			}
+		}
         return false;
     }
 
@@ -136,15 +133,24 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      * with its bare name.
      */
     public static final class Sport {
+    	
+    	private final String name;
+    	private int hash;
+    	
+    	public Sport (final String name) {
+    		this.name = name;
+    	}
+    	public final String getName() {
+    		return this.name;
+    	}
         /*
          * TODO
          * 
          * Redefine equals so that two sports are equal only if they feature the
          * very same name. Remember that you must also redefine hashCode()!
          */
-        @Override
-        public boolean equals(final Object o) {
-            return false;
+        public boolean equals(final Sport o) {
+            return this.name == o.getName();
         }
     }
 }
